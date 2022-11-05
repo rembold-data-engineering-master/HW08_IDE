@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.5
--- Dumped by pg_dump version 13.5
+-- Dumped from database version 14.4 (Debian 14.4-1.pgdg110+1)
+-- Dumped by pg_dump version 14.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,36 +16,29 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE IF EXISTS hw8;
 --
--- Name: hw8; Type: DATABASE; Schema: -; Owner: -
+-- Name: hw8; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE DATABASE hw8;
+CREATE SCHEMA hw8;
 
 
-\connect hw8
+--
+-- Name: SCHEMA hw8; Type: COMMENT; Schema: -; Owner: -
+--
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
+COMMENT ON SCHEMA hw8 IS 'standard public schema';
+
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: appointments; Type: TABLE; Schema: public; Owner: -
+-- Name: appointments; Type: TABLE; Schema: hw8; Owner: -
 --
 
-CREATE TABLE public.appointments (
+CREATE TABLE hw8.appointments (
     appointment_id bigint,
     start_time timestamp without time zone,
     duration interval,
@@ -55,10 +48,10 @@ CREATE TABLE public.appointments (
 
 
 --
--- Name: participants; Type: TABLE; Schema: public; Owner: -
+-- Name: participants; Type: TABLE; Schema: hw8; Owner: -
 --
 
-CREATE TABLE public.participants (
+CREATE TABLE hw8.participants (
     appointment_id bigint,
     user_id bigint,
     is_attending character varying(5)
@@ -66,10 +59,10 @@ CREATE TABLE public.participants (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: hw8; Owner: -
 --
 
-CREATE TABLE public.users (
+CREATE TABLE hw8.users (
     user_id bigint,
     first_name character varying(50),
     last_name character varying(50),
@@ -83,10 +76,10 @@ CREATE TABLE public.users (
 
 
 --
--- Data for Name: appointments; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: appointments; Type: TABLE DATA; Schema: hw8; Owner: -
 --
 
-COPY public.appointments (appointment_id, start_time, duration, apt_timezone, apt_topic) FROM stdin;
+COPY hw8.appointments (appointment_id, start_time, duration, apt_timezone, apt_topic) FROM stdin;
 1	2022-03-30 13:30:00	01:00:00	Pacific/Honolulu	I am angry about pottery
 2	2022-04-15 14:15:00	01:00:00	America/Chicago	Important topic: artists
 3	2022-03-30 11:00:00	02:00:00	America/Los_Angeles	Important topic: bears
@@ -591,10 +584,10 @@ COPY public.appointments (appointment_id, start_time, duration, apt_timezone, ap
 
 
 --
--- Data for Name: participants; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: participants; Type: TABLE DATA; Schema: hw8; Owner: -
 --
 
-COPY public.participants (appointment_id, user_id, is_attending) FROM stdin;
+COPY hw8.participants (appointment_id, user_id, is_attending) FROM stdin;
 1	4	Yes
 1	171	Yes
 1	35	No
@@ -9589,10 +9582,10 @@ COPY public.participants (appointment_id, user_id, is_attending) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: users; Type: TABLE DATA; Schema: hw8; Owner: -
 --
 
-COPY public.users (user_id, first_name, last_name, street_address, city, state, country, birthdate, local_timezone) FROM stdin;
+COPY hw8.users (user_id, first_name, last_name, street_address, city, state, country, birthdate, local_timezone) FROM stdin;
 1	Brielle	Denys	6389 Dieppe Ave	Ferndale	California	US	1961-12-31	America/Los_Angeles
 2	Hanna	Collins	9732 The Green	Cabo San Lucas	Baja California Sur	MX	1956-08-22	America/Mazatlan
 3	Olivia	Brar	1881 Maple Ave	Moss Beach	California	US	1984-02-03	America/Los_Angeles

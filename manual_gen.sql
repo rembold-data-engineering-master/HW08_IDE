@@ -1,5 +1,7 @@
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
+DROP SCHEMA IF EXISTS hw8 CASCADE;
+CREATE SCHEMA hw8;
+
+CREATE TABLE hw8.users (
   user_id bigint,
   first_name varchar(50),
   last_name varchar(50),
@@ -12,8 +14,7 @@ CREATE TABLE users (
 );
 -- Copy in data from CSV
 
-DROP TABLE IF EXISTS appointments;
-CREATE TABLE appointments (
+CREATE TABLE hw8.appointments (
   appointment_id bigint,
   start_time timestamp,
   duration interval,
@@ -22,8 +23,7 @@ CREATE TABLE appointments (
 );
 -- Copy data in from CSV
 
-DROP TABLE IF EXISTS participants;
-CREATE TABLE participants (
+CREATE TABLE hw8.participants (
   appointment_id bigint,
   user_id bigint,
   is_attending varchar(5)
@@ -33,8 +33,8 @@ CREATE TABLE participants (
 
 
 /* SETTING UP CONSTRAINTS */
-ALTER TABLE users ADD PRIMARY KEY (user_id);
-ALTER TABLE appointments ADD PRIMARY KEY (appointment_id);
-ALTER TABLE participants ADD PRIMARY KEY (appointment_id, user_id);
-ALTER TABLE participants ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
-ALTER TABLE participants ADD FOREIGN KEY (appointment_id) REFERENCES appointments (appointment_id);
+ALTER TABLE hw8.users ADD PRIMARY KEY (user_id);
+ALTER TABLE hw8.appointments ADD PRIMARY KEY (appointment_id);
+ALTER TABLE hw8.participants ADD PRIMARY KEY (appointment_id, user_id);
+ALTER TABLE hw8.participants ADD FOREIGN KEY (user_id) REFERENCES hw8.users (user_id);
+ALTER TABLE hw8.participants ADD FOREIGN KEY (appointment_id) REFERENCES hw8.appointments (appointment_id);
